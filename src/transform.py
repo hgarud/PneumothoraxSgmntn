@@ -9,13 +9,15 @@ import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 from matplotlib import pyplot as plt
 
+from config import IMG_DIR, MASK_DIR, ROOT_DIR
+
 class PnemoImgMask(object):
-    def __init__(self, root,  transforms):
-        self.root = root
+    def __init__(self, transforms):
+        self.root = ROOT_DIR
         self.transforms = transforms
 
-        self.imgs = list(sorted(os.listdir(os.path.join(root, "SIIM_png_train"))))
-        self.masks = list(sorted(os.listdir(os.path.join(root, "mask_new3"))))
+        self.imgs = list(sorted(os.listdir(os.path.join(self.root, IMG_DIR))))
+        self.masks = list(sorted(os.listdir(os.path.join(self.root, MASK_DIR))))
 
     def __getitem__(self, idx):
         img_path = os.path.join(self.root, "SIIM_png_train", self.imgs[idx])
